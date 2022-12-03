@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+  <style>
+      body {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+    }
+    </style>
+  </head>
+  <body>
+    <p id="country"></p>
+    <p id="button" style="font-size: 15px; font-weight: bold"></p>
+    <button id="button" onclick="random()">Random</button>
+
+    
+
+    <script>
+      var button = document.getElementById("button");
+      var country = document.getElementById("country");
+
+      var arr = [
+        "Afghanistan 🇦🇫 Kabul<br>Asia",
+        "Albania 🇦🇱 Tirana<br>Europe",
+        "Algeria 🇩🇿 Algiers<br>Africa",
+        "Andorra 🇦🇩 Andorra la Vella<br>Europe",
+      ];
+
+      button.innerHTML = "";
+
+      function random() {
+        country.innerHTML = arr[Math.floor(Math.random() * arr.length)];
+      }
+    </script>
+  </body>
+</html>
