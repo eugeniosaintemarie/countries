@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      http-equiv="Content-Type"
+      content="text/html; charset=UTF-8, width=device-width, initial-scale=1.0"
+    />
     <title>Countries</title>
     <link
       rel="icon"
@@ -25,246 +29,270 @@
         font-size: 3vw;
         font-style: italic;
       }
-      .country {
-        color: black;
-        text-align: center;
+      @media screen and (min-width: 1000px) {
+        .main {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          margin-top: 10%;
+          float: left;
+          width: 75%;
+        }
+        .action {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          float: left;
+          width: 25%;
+        }
+      }
+
+      .main {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 250px;
+        margin-top: 0%;
+      }
+      .action {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      #country {
         font-size: 5vw;
         word-break: break-all;
-        margin-top: 50%;
-        margin-left: 25%;
-        margin-right: 25%;
+        text-align: center;
+        margin-top: 33%;
       }
       #button {
         font-size: 10vw;
-        position: fixed;
-        bottom: 25%;
-        right: 50%;
-        padding: 0;
         border: none;
         background: none;
+        margin-top: 50%;
       }
     </style>
   </head>
   <body>
     <section>
-      <div>
-        <p id="country" class="country"></p>
+      <div class="main">
+        <p id="country"></p>
       </div>
-      <div>
+      <div class="action">
         <p id="button"></p>
         <button id="button" onclick="random()">🔀</button>
       </div>
-      <script>
-        var button = document.getElementById("button");
-        var country = document.getElementById("country");
-
-        var arr = [
-          "<h1>Afghanistan 🇦🇫</h1>Kabul<br><span>Asia</span>",
-          "<h1>Albania 🇦🇱</h1>Tirana<br><span>Europe</span>",
-          "<h1>Algeria 🇩🇿</h1>Algiers<br><span>Africa</span>",
-          "<h1>Andorra 🇦🇩</h1>Andorra la Vella<br><span>Europe</span>",
-          "<h1>Angola 🇦🇴</h1>Luanda<br><span>Africa</span>",
-          "<h1>Antigua and Barbuda 🇦🇬</h1>St. John's<br><span>America</span>",
-          "<h1>Argentina 🇦🇷</h1>Buenos Aires<br><span>America</span>",
-          "<h1>Armenia 🇦🇲</h1>Yerevan<br><span>Asia</span>",
-          "<h1>Australia 🇦🇺</h1>Canberra<br><span>Oceania</span>",
-          "<h1>Austria 🇦🇹</h1>Vienna<br><span>Europe</span>",
-          "<h1>Azerbaijan 🇦🇿</h1>Baku<br><span>Asia</span>",
-          "<h1>Bahamas 🇧🇸</h1>Nassau<br><span>America</span>",
-          "<h1>Bahrain 🇧🇭</h1>Manama<br><span>Asia</span>",
-          "<h1>Bangladesh 🇧🇩</h1>Dhaka<br><span>Asia</span>",
-          "<h1>Barbados 🇧🇧</h1>Bridgetown<br><span>America</span>",
-          "<h1>Belarus 🇧🇾</h1>Minsk<br><span>Europe</span>",
-          "<h1>Belgium 🇧🇪</h1>Brussels<br><span>Europe</span>",
-          "<h1>Belize 🇧🇿</h1>Belmopan<br><span>America</span>",
-          "<h1>Benin 🇧🇯</h1>Porto Novo<br><span>Africa</span>",
-          "<h1>Bhutan 🇧🇹</h1>Thimphu<br><span>Asia</span>",
-          "<h1>Bolivia 🇧🇴</h1>Sucre<br><span>America</span>",
-          "<h1>Bosnia and Herzegovina 🇧🇦</h1>Sarajevo<br><span>Europe</span>",
-          "<h1>Botswana 🇧🇼</h1>Gaborone<br><span>Africa</span>",
-          "<h1>Brazil 🇧🇷</h1>Brasilia<br><span>America</span>",
-          "<h1>Brunei 🇧🇳</h1>Bandar Seri Begawan<br><span>Asia</span>",
-          "<h1>Bulgaria 🇧🇬</h1>Sofia<br><span>Europe</span>",
-          "<h1>Burkina Faso 🇧🇫</h1>Ouagadougou<br><span>Africa</span>",
-          "<h1>Burundi 🇧🇮</h1>Bujumbura<br><span>Africa</span>",
-          "<h1>Cambodia 🇰🇭</h1>Phnom Penh<br><span>Asia</span>",
-          "<h1>Cameroon 🇨🇲</h1>Yaoundé<br><span>Africa</span>",
-          "<h1>Canada 🇨🇦</h1>Ottawa<br><span>America</span>",
-          "<h1>Cape Verde 🇨🇻</h1>Praia<br><span>Africa</span>",
-          "<h1>Central African Republic 🇨🇫</h1>Bangui<br><span>Africa</span>",
-          "<h1>Chad 🇹🇩</h1>N'Djamena<br><span>Africa</span>",
-          "<h1>Chile 🇨🇱</h1>Santiago<br><span>America</span>",
-          "<h1>China 🇨🇳</h1>Beijing<br><span>Asia</span>",
-          "<h1>Colombia 🇨🇴</h1>Bogota<br><span>America</span>",
-          "<h1>Comoros 🇰🇲</h1>Moroni<br><span>Africa</span>",
-          "<h1>Costa Rica 🇨🇷</h1>San José<br><span>America</span>",
-          "<h1>Croatia 🇭🇷</h1>Zagreb<br><span>Europe</span>",
-          "<h1>Cuba 🇨🇺</h1>Havana<br><span>America</span>",
-          "<h1>Cyprus 🇨🇾</h1>Nicosia<br><span>Europe</span>",
-          "<h1>Czech Republic 🇨🇿</h1>Prague<br><span>Europe</span>",
-          "<h1>Democratic Republic of Congo 🇨🇩</h1>Kinshasa<br><span>Africa</span>",
-          "<h1>Denmark 🇩🇰</h1>Copenagen<br><span>Europe</span>",
-          "<h1>Djibouti 🇩🇯</h1>Djibouti<br><span>Africa</span>",
-          "<h1>Dominica 🇩🇲</h1>Roseau<br><span>America</span>",
-          "<h1>Dominican Republic 🇩🇴</h1>Santo Domingo<br><span>America</span>",
-          "<h1>East Timor 🇹🇱</h1>Dili<br><span>Oceania</span>",
-          "<h1>Ecuador 🇪🇨</h1>Quito<br><span>America</span>",
-          "<h1>Egypt 🇪🇬</h1>Cairo<br><span>Africa</span>",
-          "<h1>El Salvador 🇸🇻</h1>San Salvador<br><span>America</span>",
-          "<h1>Equatorial Guinea 🇬🇶</h1>Malabo<br><span>Africa</span>",
-          "<h1>Eritrea 🇪🇷</h1>Asmara<br><span>Africa</span>",
-          "<h1>Estonia 🇪🇪</h1>Tallinn<br><span>Europe</span>",
-          "<h1>Eswatini 🇸🇿</h1>Mbabane<br><span>Africa</span>",
-          "<h1>Ethiopia 🇪🇹</h1>Addis Ababa<br><span>Africa</span>",
-          "<h1>Fiji 🇫🇯</h1>Suva<br><span>Oceania</span>",
-          "<h1>Finland 🇫🇮</h1>Helsinki<br><span>Europe</span>",
-          "<h1>France 🇫🇷</h1>Paris<br><span>Europe</span>",
-          "<h1>Gabon 🇬🇦</h1>Libreville<br><span>Africa</span>",
-          "<h1>Gambia 🇬🇲</h1>Banjul<br><span>Africa</span>",
-          "<h1>Georgia 🇬🇪</h1>Tbilisi<br><span>Asia</span>",
-          "<h1>Germany 🇩🇪</h1>Berlin<br><span>Europe</span>",
-          "<h1>Ghana 🇬🇭</h1>Accra<br><span>Africa</span>",
-          "<h1>Greece 🇬🇷</h1>Athens<br><span>Europe</span>",
-          "<h1>Grenada 🇬🇩</h1>St. George's<br><span>America</span>",
-          "<h1>Guatemala 🇬🇹</h1>Guatemala City<br><span>America</span>",
-          "<h1>Guinea 🇬🇳</h1>Conakry<br><span>Africa</span>",
-          "<h1>Guinea-Bissau 🇬🇼</h1>Bissau<br><span>Africa</span>",
-          "<h1>Guyana 🇬🇾</h1>Georgetown<br><span>America</span>",
-          "<h1>Haiti 🇭🇹</h1>Port-au-Prince<br><span>America</span>",
-          "<h1>Honduras 🇭🇳</h1>Tegucigalpa<br><span>America</span>",
-          "<h1>Hungary 🇭🇺</h1>Budapest<br><span>Europe</span>",
-          "<h1>Iceland 🇮🇸</h1>Reykjavík<br><span>Europe</span>",
-          "<h1>India 🇮🇳</h1>New Delhi<br><span>Asia</span>",
-          "<h1>Indonesia 🇮🇩</h1>Jakarta<br><span>Asia</span>",
-          "<h1>Iran 🇮🇷</h1>Tehran<br><span>Asia</span>",
-          "<h1>Iraq 🇮🇶</h1>Baghdad<br><span>Asia</span>",
-          "<h1>Ireland 🇮🇪</h1>Dublin<br><span>Europe</span>",
-          "<h1>Israel 🇮🇱</h1>Jerusalem<br><span>Asia</span>",
-          "<h1>Italy 🇮🇹</h1>Rome<br><span>Europe</span>",
-          "<h1>Ivory Coast 🇨🇮</h1>Yamoussoukro<br><span>Africa</span>",
-          "<h1>Jamaica 🇯🇲</h1>Kingston<br><span>America</span>",
-          "<h1>Japan 🇯🇵</h1>Tokyo<br><span>Asia</span>",
-          "<h1>Jordan 🇯🇴</h1>Amman<br><span>Asia</span>",
-          "<h1>Kazakhstan 🇰🇿</h1>Astana<br><span>Asia</span>",
-          "<h1>Kenya 🇰🇪</h1>Nairobi<br><span>Africa</span>",
-          "<h1>Kiribati 🇰🇮</h1>Tarawa<br><span>Oceania</span>",
-          "<h1>Korea, North 🇰🇵</h1>Pyongyang<br><span>Asia</span>",
-          "<h1>Korea, South 🇰🇷</h1>Seoul<br><span>Asia</span>",
-          "<h1>Kosovo 🇽🇰</h1>Pristina<br><span>Europe</span>",
-          "<h1>Kuwait 🇰🇼</h1>Kuwait City<br><span>Asia</span>",
-          "<h1>Kyrgyzstan 🇰🇬</h1>Bishkek<br><span>Asia</span>",
-          "<h1>Laos 🇱🇦</h1>Vientiane<br><span>Asia</span>",
-          "<h1>Latvia 🇱🇻</h1>Riga<br><span>Europe</span>",
-          "<h1>Lebanon 🇱🇧</h1>Beirut<br><span>Asia</span>",
-          "<h1>Lesotho 🇱🇸</h1>Maseru<br><span>Africa</span>",
-          "<h1>Liberia 🇱🇷</h1>Monrovia<br><span>Africa</span>",
-          "<h1>Libya 🇱🇾</h1>Tripoli<br><span>Africa</span>",
-          "<h1>Liechtenstein 🇱🇮</h1>Vaduz<br><span>Europe</span>",
-          "<h1>Lithuania 🇱🇹</h1>Vilnius<br><span>Europe</span>",
-          "<h1>Luxembourg 🇱🇺</h1>Luxembourg<br><span>Europe</span>",
-          "<h1>Madagascar 🇲🇬</h1>Antananarivo<br><span>Africa</span>",
-          "<h1>Malawi 🇲🇼</h1>Lilongwe<br><span>Africa</span>",
-          "<h1>Malaysia 🇲🇾</h1>Kuala Lumpur<br><span>Asia</span>",
-          "<h1>Maldives 🇲🇻</h1>Malé<br><span>Asia</span>",
-          "<h1>Mali 🇲🇱</h1>Bamako<br><span>Africa</span>",
-          "<h1>Malta 🇲🇹</h1>Valletta<br><span>Europe</span>",
-          "<h1>Marshall Islands 🇲🇭</h1>Majuro<br><span>Oceania</span>",
-          "<h1>Mauritania 🇲🇷</h1>Nouakchott<br><span>Africa</span>",
-          "<h1>Mauritius 🇲🇺</h1>Port Louis<br><span>Africa</span>",
-          "<h1>Mexico 🇲🇽</h1>Mexico City<br><span>America</span>",
-          "<h1>Micronesia 🇫🇲</h1>Palikir<br><span>Oceania</span>",
-          "<h1>Moldova 🇲🇩</h1>Chisinau<br><span>Europe</span>",
-          "<h1>Monaco 🇲🇨</h1>Monaco<br><span>Europe</span>",
-          "<h1>Mongolia 🇲🇳</h1>Ulaanbaatar<br><span>Asia</span>",
-          "<h1>Montenegro 🇲🇪</h1>Podgorica<br><span>Europe</span>",
-          "<h1>Morocco 🇲🇦</h1>Rabat<br><span>Africa</span>",
-          "<h1>Mozambique 🇲🇿</h1>Maputo<br><span>Africa</span>",
-          "<h1>Myanmar 🇲🇲</h1>Naypyidaw<br><span>Asia</span>",
-          "<h1>Namibia 🇳🇦</h1>Windhoek<br><span>Africa</span>",
-          "<h1>Nauru 🇳🇷</h1>Yaren<br><span>Oceania</span>",
-          "<h1>Nepal 🇳🇵</h1>Kathmandu<br><span>Asia</span>",
-          "<h1>Netherlands 🇳🇱</h1>Amsterdam<br><span>Europe</span>",
-          "<h1>New Zealand 🇳🇿</h1>Wellington<br><span>Oceania</span>",
-          "<h1>Nicaragua 🇳🇮</h1>Managua<br><span>America</span>",
-          "<h1>Niger 🇳🇪</h1>Niamey<br><span>Africa</span>",
-          "<h1>Nigeria 🇳🇬</h1>Abuja<br><span>Africa</span>",
-          "<h1>North Macedonia 🇲🇰</h1>Skopje<br><span>Europe</span>",
-          "<h1>Norway 🇳🇴</h1>Oslo<br><span>Europe</span>",
-          "<h1>Oman 🇴🇲</h1>Muscat<br><span>Asia</span>",
-          "<h1>Pakistan 🇵🇰</h1>Islamabad<br><span>Asia</span>",
-          "<h1>Palau 🇵🇼</h1>Melekeok<br><span>Oceania</span>",
-          "<h1>Palestine 🇵🇸</h1>East Jerusalem<br><span>Asia</span>",
-          "<h1>Panama 🇵🇦</h1>Panama City<br><span>America</span>",
-          "<h1>Papua New Guinea 🇵🇬</h1>Port Moresby<br><span>Oceania</span>",
-          "<h1>Paraguay 🇵🇾</h1>Asunción<br><span>America</span>",
-          "<h1>Peru 🇵🇪</h1>Lima<br><span>America</span>",
-          "<h1>Philippines 🇵🇭</h1>Manila<br><span>Asia</span>",
-          "<h1>Poland 🇵🇱</h1>Warsaw<br><span>Europe</span>",
-          "<h1>Portugal 🇵🇹</h1>Lisbon<br><span>Europe</span>",
-          "<h1>Qatar 🇶🇦</h1>Doha<br><span>Asia</span>",
-          "<h1>Republic of the Congo 🇨🇬</h1>Brazzaville<br><span>Africa</span>",
-          "<h1>Romania 🇷🇴</h1>Bucharest<br><span>Europe</span>",
-          "<h1>Russia 🇷🇺</h1>Moscow<br><span>Europe</span>",
-          "<h1>Rwanda 🇷🇼</h1>Kigali<br><span>Africa</span>",
-          "<h1>Saint Kitts and Nevis 🇰🇳</h1>Basseterre<br><span>America</span>",
-          "<h1>Saint Lucia 🇱🇨</h1>Castries<br><span>America</span>",
-          "<h1>Saint Vincent and the Grenadines 🇻🇨</h1>Kingstown<br><span>America</span>",
-          "<h1>Samoa 🇼🇸</h1>Apia<br><span>Oceania</span>",
-          "<h1>San Marino 🇸🇲</h1>San Marino<br><span>Europe</span>",
-          "<h1>São Tomé and Príncipe 🇸🇹</h1>São Tomé<br><span>Africa</span>",
-          "<h1>Saudi Arabia 🇸🇦</h1>Riyadh<br><span>Asia</span>",
-          "<h1>Senegal 🇸🇳</h1>Dakar<br><span>Africa</span>",
-          "<h1>Serbia 🇷🇸</h1>Belgrade<br><span>Europe</span>",
-          "<h1>Seychelles 🇸🇨</h1>Victoria<br><span>Africa</span>",
-          "<h1>Sierra Leone 🇸🇱</h1>Freetown<br><span>Africa</span>",
-          "<h1>Singapore 🇸🇬</h1>Singapore<br><span>Asia</span>",
-          "<h1>Slovakia 🇸🇰</h1>Bratislava<br><span>Europe</span>",
-          "<h1>Slovenia 🇸🇮</h1>Ljubljana<br><span>Europe</span>",
-          "<h1>Solomon Islands 🇸🇧</h1>Honiara<br><span>Oceania</span>",
-          "<h1>Somalia 🇸🇴</h1>Mogadishu<br><span>Africa</span>",
-          "<h1>South Africa 🇿🇦</h1>Pretoria<br><span>Africa</span>",
-          "<h1>South Sudan 🇿🇦</h1>Juba<br><span>Africa</span>",
-          "<h1>Spain 🇪🇸</h1>Madrid<br><span>Europe</span>",
-          "<h1>Sri Lanka 🇱🇰</h1>Sri Jayawardenapura Kotte<br><span>Asia</span>",
-          "<h1>Sudan 🇸🇩</h1>Khartoum<br><span>Africa</span>",
-          "<h1>Suriname 🇸🇷</h1>Paramaribo<br><span>America</span>",
-          "<h1>Sweden 🇸🇪</h1>Stockholm<br><span>Europe</span>",
-          "<h1>Switzerland 🇨🇭</h1>Bern<br><span>Europe</span>",
-          "<h1>Syria 🇸🇾</h1>Damascus<br><span>Asia</span>",
-          "<h1>Taiwan 🇹🇼</h1>Taipei<br><span>Asia</span>",
-          "<h1>Tajikistan 🇹🇯</h1>Dushanbe<br><span>Asia</span>",
-          "<h1>Tanzania 🇹🇿</h1>Dodoma<br><span>Africa</span>",
-          "<h1>Thailand 🇹🇭</h1>Bangkok<br><span>Asia</span>",
-          "<h1>Togo 🇹🇬</h1>Lomé<br><span>Africa</span>",
-          "<h1>Tonga 🇹🇴</h1>Nukualofa<br><span>Oceania</span>",
-          "<h1>Trinidad and Tobago 🇹🇹</h1>Port of Spain<br><span>America</span>",
-          "<h1>Tunisia 🇹🇳</h1>Tunis<br><span>Africa</span>",
-          "<h1>Turkey 🇹🇷</h1>Ankara<br><span>Asia</span>",
-          "<h1>Turkmenistan 🇹🇲</h1>Ashgabat<br><span>Asia</span>",
-          "<h1>Tuvalu 🇹🇻</h1>Funafuti<br><span>Oceania</span>",
-          "<h1>Uganda 🇺🇬</h1>Kampala<br><span>Africa</span>",
-          "<h1>Ukraine 🇺🇦</h1>Kiev<br><span>Europe</span>",
-          "<h1>United Arab Emirates 🇦🇪</h1>Abu Dhabi<br><span>Asia</span>",
-          "<h1>United Kingdom 🇬🇧</h1>London<br><span>Europe</span>",
-          "<h1>United States 🇺🇸</h1>Washington D.C.<br><span>America</span>",
-          "<h1>Uruguay 🇺🇾</h1>Montevideo<br><span>America</span>",
-          "<h1>Uzbekistan 🇺🇿</h1>Tashkent<br><span>Asia</span>",
-          "<h1>Vanuatu 🇻🇺</h1>Port Vila<br><span>Oceania</span>",
-          "<h1>Vatican City 🇻🇦</h1>Vatican City<br><span>Europe</span>",
-          "<h1>Venezuela 🇻🇪</h1>Caracas<br><span>America</span>",
-          "<h1>Vietnam 🇻🇳</h1>Hanoi<br><span>Asia</span>",
-          "<h1>Yemen 🇾🇪</h1>Sana'a<br><span>Asia</span>",
-          "<h1>Zambia 🇿🇲</h1>Lusaka<br><span>Africa</span>",
-          "<h1>Zimbabwe 🇿🇼</h1>Harare<br><span>Africa</span>",
-        ];
-
-        button.innerHTML = "";
-
-        function random() {
-          country.innerHTML = arr[Math.floor(Math.random() * arr.length)];
-        }
-      </script>
     </section>
+    <script>
+      var button = document.getElementById("button");
+      var country = document.getElementById("country");
+
+      var arr = [
+        "<h1>Afghanistan 🇦🇫</h1>Kabul<br><span>Asia</span>",
+        "<h1>Albania 🇦🇱</h1>Tirana<br><span>Europe</span>",
+        "<h1>Algeria 🇩🇿</h1>Algiers<br><span>Africa</span>",
+        "<h1>Andorra 🇦🇩</h1>Andorra la Vella<br><span>Europe</span>",
+        "<h1>Angola 🇦🇴</h1>Luanda<br><span>Africa</span>",
+        "<h1>Antigua and Barbuda 🇦🇬</h1>St. John's<br><span>America</span>",
+        "<h1>Argentina 🇦🇷</h1>Buenos Aires<br><span>America</span>",
+        "<h1>Armenia 🇦🇲</h1>Yerevan<br><span>Asia</span>",
+        "<h1>Australia 🇦🇺</h1>Canberra<br><span>Oceania</span>",
+        "<h1>Austria 🇦🇹</h1>Vienna<br><span>Europe</span>",
+        "<h1>Azerbaijan 🇦🇿</h1>Baku<br><span>Asia</span>",
+        "<h1>Bahamas 🇧🇸</h1>Nassau<br><span>America</span>",
+        "<h1>Bahrain 🇧🇭</h1>Manama<br><span>Asia</span>",
+        "<h1>Bangladesh 🇧🇩</h1>Dhaka<br><span>Asia</span>",
+        "<h1>Barbados 🇧🇧</h1>Bridgetown<br><span>America</span>",
+        "<h1>Belarus 🇧🇾</h1>Minsk<br><span>Europe</span>",
+        "<h1>Belgium 🇧🇪</h1>Brussels<br><span>Europe</span>",
+        "<h1>Belize 🇧🇿</h1>Belmopan<br><span>America</span>",
+        "<h1>Benin 🇧🇯</h1>Porto Novo<br><span>Africa</span>",
+        "<h1>Bhutan 🇧🇹</h1>Thimphu<br><span>Asia</span>",
+        "<h1>Bolivia 🇧🇴</h1>Sucre<br><span>America</span>",
+        "<h1>Bosnia and Herzegovina 🇧🇦</h1>Sarajevo<br><span>Europe</span>",
+        "<h1>Botswana 🇧🇼</h1>Gaborone<br><span>Africa</span>",
+        "<h1>Brazil 🇧🇷</h1>Brasilia<br><span>America</span>",
+        "<h1>Brunei 🇧🇳</h1>Bandar Seri Begawan<br><span>Asia</span>",
+        "<h1>Bulgaria 🇧🇬</h1>Sofia<br><span>Europe</span>",
+        "<h1>Burkina Faso 🇧🇫</h1>Ouagadougou<br><span>Africa</span>",
+        "<h1>Burundi 🇧🇮</h1>Bujumbura<br><span>Africa</span>",
+        "<h1>Cambodia 🇰🇭</h1>Phnom Penh<br><span>Asia</span>",
+        "<h1>Cameroon 🇨🇲</h1>Yaoundé<br><span>Africa</span>",
+        "<h1>Canada 🇨🇦</h1>Ottawa<br><span>America</span>",
+        "<h1>Cape Verde 🇨🇻</h1>Praia<br><span>Africa</span>",
+        "<h1>Central African Republic 🇨🇫</h1>Bangui<br><span>Africa</span>",
+        "<h1>Chad 🇹🇩</h1>N'Djamena<br><span>Africa</span>",
+        "<h1>Chile 🇨🇱</h1>Santiago<br><span>America</span>",
+        "<h1>China 🇨🇳</h1>Beijing<br><span>Asia</span>",
+        "<h1>Colombia 🇨🇴</h1>Bogota<br><span>America</span>",
+        "<h1>Comoros 🇰🇲</h1>Moroni<br><span>Africa</span>",
+        "<h1>Costa Rica 🇨🇷</h1>San José<br><span>America</span>",
+        "<h1>Croatia 🇭🇷</h1>Zagreb<br><span>Europe</span>",
+        "<h1>Cuba 🇨🇺</h1>Havana<br><span>America</span>",
+        "<h1>Cyprus 🇨🇾</h1>Nicosia<br><span>Europe</span>",
+        "<h1>Czech Republic 🇨🇿</h1>Prague<br><span>Europe</span>",
+        "<h1>Democratic Republic of Congo 🇨🇩</h1>Kinshasa<br><span>Africa</span>",
+        "<h1>Denmark 🇩🇰</h1>Copenagen<br><span>Europe</span>",
+        "<h1>Djibouti 🇩🇯</h1>Djibouti<br><span>Africa</span>",
+        "<h1>Dominica 🇩🇲</h1>Roseau<br><span>America</span>",
+        "<h1>Dominican Republic 🇩🇴</h1>Santo Domingo<br><span>America</span>",
+        "<h1>East Timor 🇹🇱</h1>Dili<br><span>Oceania</span>",
+        "<h1>Ecuador 🇪🇨</h1>Quito<br><span>America</span>",
+        "<h1>Egypt 🇪🇬</h1>Cairo<br><span>Africa</span>",
+        "<h1>El Salvador 🇸🇻</h1>San Salvador<br><span>America</span>",
+        "<h1>Equatorial Guinea 🇬🇶</h1>Malabo<br><span>Africa</span>",
+        "<h1>Eritrea 🇪🇷</h1>Asmara<br><span>Africa</span>",
+        "<h1>Estonia 🇪🇪</h1>Tallinn<br><span>Europe</span>",
+        "<h1>Eswatini 🇸🇿</h1>Mbabane<br><span>Africa</span>",
+        "<h1>Ethiopia 🇪🇹</h1>Addis Ababa<br><span>Africa</span>",
+        "<h1>Fiji 🇫🇯</h1>Suva<br><span>Oceania</span>",
+        "<h1>Finland 🇫🇮</h1>Helsinki<br><span>Europe</span>",
+        "<h1>France 🇫🇷</h1>Paris<br><span>Europe</span>",
+        "<h1>Gabon 🇬🇦</h1>Libreville<br><span>Africa</span>",
+        "<h1>Gambia 🇬🇲</h1>Banjul<br><span>Africa</span>",
+        "<h1>Georgia 🇬🇪</h1>Tbilisi<br><span>Asia</span>",
+        "<h1>Germany 🇩🇪</h1>Berlin<br><span>Europe</span>",
+        "<h1>Ghana 🇬🇭</h1>Accra<br><span>Africa</span>",
+        "<h1>Greece 🇬🇷</h1>Athens<br><span>Europe</span>",
+        "<h1>Grenada 🇬🇩</h1>St. George's<br><span>America</span>",
+        "<h1>Guatemala 🇬🇹</h1>Guatemala City<br><span>America</span>",
+        "<h1>Guinea 🇬🇳</h1>Conakry<br><span>Africa</span>",
+        "<h1>Guinea-Bissau 🇬🇼</h1>Bissau<br><span>Africa</span>",
+        "<h1>Guyana 🇬🇾</h1>Georgetown<br><span>America</span>",
+        "<h1>Haiti 🇭🇹</h1>Port-au-Prince<br><span>America</span>",
+        "<h1>Honduras 🇭🇳</h1>Tegucigalpa<br><span>America</span>",
+        "<h1>Hungary 🇭🇺</h1>Budapest<br><span>Europe</span>",
+        "<h1>Iceland 🇮🇸</h1>Reykjavík<br><span>Europe</span>",
+        "<h1>India 🇮🇳</h1>New Delhi<br><span>Asia</span>",
+        "<h1>Indonesia 🇮🇩</h1>Jakarta<br><span>Asia</span>",
+        "<h1>Iran 🇮🇷</h1>Tehran<br><span>Asia</span>",
+        "<h1>Iraq 🇮🇶</h1>Baghdad<br><span>Asia</span>",
+        "<h1>Ireland 🇮🇪</h1>Dublin<br><span>Europe</span>",
+        "<h1>Israel 🇮🇱</h1>Jerusalem<br><span>Asia</span>",
+        "<h1>Italy 🇮🇹</h1>Rome<br><span>Europe</span>",
+        "<h1>Ivory Coast 🇨🇮</h1>Yamoussoukro<br><span>Africa</span>",
+        "<h1>Jamaica 🇯🇲</h1>Kingston<br><span>America</span>",
+        "<h1>Japan 🇯🇵</h1>Tokyo<br><span>Asia</span>",
+        "<h1>Jordan 🇯🇴</h1>Amman<br><span>Asia</span>",
+        "<h1>Kazakhstan 🇰🇿</h1>Astana<br><span>Asia</span>",
+        "<h1>Kenya 🇰🇪</h1>Nairobi<br><span>Africa</span>",
+        "<h1>Kiribati 🇰🇮</h1>Tarawa<br><span>Oceania</span>",
+        "<h1>Korea, North 🇰🇵</h1>Pyongyang<br><span>Asia</span>",
+        "<h1>Korea, South 🇰🇷</h1>Seoul<br><span>Asia</span>",
+        "<h1>Kosovo 🇽🇰</h1>Pristina<br><span>Europe</span>",
+        "<h1>Kuwait 🇰🇼</h1>Kuwait City<br><span>Asia</span>",
+        "<h1>Kyrgyzstan 🇰🇬</h1>Bishkek<br><span>Asia</span>",
+        "<h1>Laos 🇱🇦</h1>Vientiane<br><span>Asia</span>",
+        "<h1>Latvia 🇱🇻</h1>Riga<br><span>Europe</span>",
+        "<h1>Lebanon 🇱🇧</h1>Beirut<br><span>Asia</span>",
+        "<h1>Lesotho 🇱🇸</h1>Maseru<br><span>Africa</span>",
+        "<h1>Liberia 🇱🇷</h1>Monrovia<br><span>Africa</span>",
+        "<h1>Libya 🇱🇾</h1>Tripoli<br><span>Africa</span>",
+        "<h1>Liechtenstein 🇱🇮</h1>Vaduz<br><span>Europe</span>",
+        "<h1>Lithuania 🇱🇹</h1>Vilnius<br><span>Europe</span>",
+        "<h1>Luxembourg 🇱🇺</h1>Luxembourg<br><span>Europe</span>",
+        "<h1>Madagascar 🇲🇬</h1>Antananarivo<br><span>Africa</span>",
+        "<h1>Malawi 🇲🇼</h1>Lilongwe<br><span>Africa</span>",
+        "<h1>Malaysia 🇲🇾</h1>Kuala Lumpur<br><span>Asia</span>",
+        "<h1>Maldives 🇲🇻</h1>Malé<br><span>Asia</span>",
+        "<h1>Mali 🇲🇱</h1>Bamako<br><span>Africa</span>",
+        "<h1>Malta 🇲🇹</h1>Valletta<br><span>Europe</span>",
+        "<h1>Marshall Islands 🇲🇭</h1>Majuro<br><span>Oceania</span>",
+        "<h1>Mauritania 🇲🇷</h1>Nouakchott<br><span>Africa</span>",
+        "<h1>Mauritius 🇲🇺</h1>Port Louis<br><span>Africa</span>",
+        "<h1>Mexico 🇲🇽</h1>Mexico City<br><span>America</span>",
+        "<h1>Micronesia 🇫🇲</h1>Palikir<br><span>Oceania</span>",
+        "<h1>Moldova 🇲🇩</h1>Chisinau<br><span>Europe</span>",
+        "<h1>Monaco 🇲🇨</h1>Monaco<br><span>Europe</span>",
+        "<h1>Mongolia 🇲🇳</h1>Ulaanbaatar<br><span>Asia</span>",
+        "<h1>Montenegro 🇲🇪</h1>Podgorica<br><span>Europe</span>",
+        "<h1>Morocco 🇲🇦</h1>Rabat<br><span>Africa</span>",
+        "<h1>Mozambique 🇲🇿</h1>Maputo<br><span>Africa</span>",
+        "<h1>Myanmar 🇲🇲</h1>Naypyidaw<br><span>Asia</span>",
+        "<h1>Namibia 🇳🇦</h1>Windhoek<br><span>Africa</span>",
+        "<h1>Nauru 🇳🇷</h1>Yaren<br><span>Oceania</span>",
+        "<h1>Nepal 🇳🇵</h1>Kathmandu<br><span>Asia</span>",
+        "<h1>Netherlands 🇳🇱</h1>Amsterdam<br><span>Europe</span>",
+        "<h1>New Zealand 🇳🇿</h1>Wellington<br><span>Oceania</span>",
+        "<h1>Nicaragua 🇳🇮</h1>Managua<br><span>America</span>",
+        "<h1>Niger 🇳🇪</h1>Niamey<br><span>Africa</span>",
+        "<h1>Nigeria 🇳🇬</h1>Abuja<br><span>Africa</span>",
+        "<h1>North Macedonia 🇲🇰</h1>Skopje<br><span>Europe</span>",
+        "<h1>Norway 🇳🇴</h1>Oslo<br><span>Europe</span>",
+        "<h1>Oman 🇴🇲</h1>Muscat<br><span>Asia</span>",
+        "<h1>Pakistan 🇵🇰</h1>Islamabad<br><span>Asia</span>",
+        "<h1>Palau 🇵🇼</h1>Melekeok<br><span>Oceania</span>",
+        "<h1>Palestine 🇵🇸</h1>East Jerusalem<br><span>Asia</span>",
+        "<h1>Panama 🇵🇦</h1>Panama City<br><span>America</span>",
+        "<h1>Papua New Guinea 🇵🇬</h1>Port Moresby<br><span>Oceania</span>",
+        "<h1>Paraguay 🇵🇾</h1>Asunción<br><span>America</span>",
+        "<h1>Peru 🇵🇪</h1>Lima<br><span>America</span>",
+        "<h1>Philippines 🇵🇭</h1>Manila<br><span>Asia</span>",
+        "<h1>Poland 🇵🇱</h1>Warsaw<br><span>Europe</span>",
+        "<h1>Portugal 🇵🇹</h1>Lisbon<br><span>Europe</span>",
+        "<h1>Qatar 🇶🇦</h1>Doha<br><span>Asia</span>",
+        "<h1>Republic of the Congo 🇨🇬</h1>Brazzaville<br><span>Africa</span>",
+        "<h1>Romania 🇷🇴</h1>Bucharest<br><span>Europe</span>",
+        "<h1>Russia 🇷🇺</h1>Moscow<br><span>Europe</span>",
+        "<h1>Rwanda 🇷🇼</h1>Kigali<br><span>Africa</span>",
+        "<h1>Saint Kitts and Nevis 🇰🇳</h1>Basseterre<br><span>America</span>",
+        "<h1>Saint Lucia 🇱🇨</h1>Castries<br><span>America</span>",
+        "<h1>Saint Vincent and the Grenadines 🇻🇨</h1>Kingstown<br><span>America</span>",
+        "<h1>Samoa 🇼🇸</h1>Apia<br><span>Oceania</span>",
+        "<h1>San Marino 🇸🇲</h1>San Marino<br><span>Europe</span>",
+        "<h1>São Tomé and Príncipe 🇸🇹</h1>São Tomé<br><span>Africa</span>",
+        "<h1>Saudi Arabia 🇸🇦</h1>Riyadh<br><span>Asia</span>",
+        "<h1>Senegal 🇸🇳</h1>Dakar<br><span>Africa</span>",
+        "<h1>Serbia 🇷🇸</h1>Belgrade<br><span>Europe</span>",
+        "<h1>Seychelles 🇸🇨</h1>Victoria<br><span>Africa</span>",
+        "<h1>Sierra Leone 🇸🇱</h1>Freetown<br><span>Africa</span>",
+        "<h1>Singapore 🇸🇬</h1>Singapore<br><span>Asia</span>",
+        "<h1>Slovakia 🇸🇰</h1>Bratislava<br><span>Europe</span>",
+        "<h1>Slovenia 🇸🇮</h1>Ljubljana<br><span>Europe</span>",
+        "<h1>Solomon Islands 🇸🇧</h1>Honiara<br><span>Oceania</span>",
+        "<h1>Somalia 🇸🇴</h1>Mogadishu<br><span>Africa</span>",
+        "<h1>South Africa 🇿🇦</h1>Pretoria<br><span>Africa</span>",
+        "<h1>South Sudan 🇿🇦</h1>Juba<br><span>Africa</span>",
+        "<h1>Spain 🇪🇸</h1>Madrid<br><span>Europe</span>",
+        "<h1>Sri Lanka 🇱🇰</h1>Sri Jayawardenapura Kotte<br><span>Asia</span>",
+        "<h1>Sudan 🇸🇩</h1>Khartoum<br><span>Africa</span>",
+        "<h1>Suriname 🇸🇷</h1>Paramaribo<br><span>America</span>",
+        "<h1>Sweden 🇸🇪</h1>Stockholm<br><span>Europe</span>",
+        "<h1>Switzerland 🇨🇭</h1>Bern<br><span>Europe</span>",
+        "<h1>Syria 🇸🇾</h1>Damascus<br><span>Asia</span>",
+        "<h1>Taiwan 🇹🇼</h1>Taipei<br><span>Asia</span>",
+        "<h1>Tajikistan 🇹🇯</h1>Dushanbe<br><span>Asia</span>",
+        "<h1>Tanzania 🇹🇿</h1>Dodoma<br><span>Africa</span>",
+        "<h1>Thailand 🇹🇭</h1>Bangkok<br><span>Asia</span>",
+        "<h1>Togo 🇹🇬</h1>Lomé<br><span>Africa</span>",
+        "<h1>Tonga 🇹🇴</h1>Nukualofa<br><span>Oceania</span>",
+        "<h1>Trinidad and Tobago 🇹🇹</h1>Port of Spain<br><span>America</span>",
+        "<h1>Tunisia 🇹🇳</h1>Tunis<br><span>Africa</span>",
+        "<h1>Turkey 🇹🇷</h1>Ankara<br><span>Asia</span>",
+        "<h1>Turkmenistan 🇹🇲</h1>Ashgabat<br><span>Asia</span>",
+        "<h1>Tuvalu 🇹🇻</h1>Funafuti<br><span>Oceania</span>",
+        "<h1>Uganda 🇺🇬</h1>Kampala<br><span>Africa</span>",
+        "<h1>Ukraine 🇺🇦</h1>Kiev<br><span>Europe</span>",
+        "<h1>United Arab Emirates 🇦🇪</h1>Abu Dhabi<br><span>Asia</span>",
+        "<h1>United Kingdom 🇬🇧</h1>London<br><span>Europe</span>",
+        "<h1>United States 🇺🇸</h1>Washington D.C.<br><span>America</span>",
+        "<h1>Uruguay 🇺🇾</h1>Montevideo<br><span>America</span>",
+        "<h1>Uzbekistan 🇺🇿</h1>Tashkent<br><span>Asia</span>",
+        "<h1>Vanuatu 🇻🇺</h1>Port Vila<br><span>Oceania</span>",
+        "<h1>Vatican City 🇻🇦</h1>Vatican City<br><span>Europe</span>",
+        "<h1>Venezuela 🇻🇪</h1>Caracas<br><span>America</span>",
+        "<h1>Vietnam 🇻🇳</h1>Hanoi<br><span>Asia</span>",
+        "<h1>Yemen 🇾🇪</h1>Sana'a<br><span>Asia</span>",
+        "<h1>Zambia 🇿🇲</h1>Lusaka<br><span>Africa</span>",
+        "<h1>Zimbabwe 🇿🇼</h1>Harare<br><span>Africa</span>",
+      ];
+
+      button.innerHTML = "";
+
+      function random() {
+        country.innerHTML = arr[Math.floor(Math.random() * arr.length)];
+      }
+    </script>
     <footer></footer>
   </body>
 </html>
